@@ -1,0 +1,47 @@
+name: Backend Build
+
+on:
+  push:
+    paths:
+      - 'nuc-web-app-spring-service/**'
+      - '.github/workflows/backend.yml'
+jobs:
+  run-tests:
+    name: 'Run Unit Tests'
+    runs-on: [self-hosted, dell-runner]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Run tests
+        working-directory: backend
+        run: ./nuc-web-app-spring-service/gradlew test
+
+  build-docker:
+    name: 'Build Docker Image'
+    runs-on: [self-hosted, dell-runner]
+    needs: run-tests
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        working-directory: backend
+        run: docker build -t nuc-web-app-spring-service:latest .
+
+  deploy:
+    name: "Start Docker Container"
+    runs-on: [self-hosted, dell-runner]
+    needs: [run-tests, build-docker]
+    steps:
+      - name: Stop existing containers
+        run: docker rm -f nuc-web-app-spring-service || true
+
+      - name: Run backend container
+        run: docker run -d --name nuc-web-app-spring-service -p 8090:8080 nuc-web-app-spring-service:latest
