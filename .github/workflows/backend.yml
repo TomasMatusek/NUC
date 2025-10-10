@@ -20,7 +20,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Run tests
-        working-directory: backend
+        working-directory: nuc-web-app-spring-service
         run: ./nuc-web-app-spring-service/gradlew test
 
   build-docker:
@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        working-directory: backend
+        working-directory: nuc-web-app-spring-service
         run: docker build -t nuc-web-app-spring-service:latest .
 
   deploy:
