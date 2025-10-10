@@ -19,5 +19,7 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Build Spring App
+        run: |
+          cd ./nuc-web-app-spring-service/nuc-web-app-spring-service
+          ./gradlew build
