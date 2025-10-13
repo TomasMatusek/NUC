@@ -10,7 +10,7 @@ on:
 jobs:
   run-tests:
     name: 'Run Unit Tests'
-    runs-on: [self-hosted, dell-runner]
+    runs-on: [self-hosted, nuc-runner]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,7 +27,7 @@ jobs:
 
   build-docker:
     name: 'Build Docker Image'
-    runs-on: [self-hosted, dell-runner]
+    runs-on: [self-hosted, nuc-runner]
     needs: run-tests
     steps:
       - name: Checkout code
@@ -39,7 +39,7 @@ jobs:
 
   deploy:
     name: "Start Docker Container"
-    runs-on: [self-hosted, dell-runner]
+    runs-on: [self-hosted, nuc-runner]
     needs: [run-tests, build-docker]
     steps:
       - name: Stop existing containers
