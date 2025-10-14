@@ -23,7 +23,7 @@ jobs:
 
       - name: Run tests
         working-directory: nuc-web-app-spring-service
-        run: gradle test
+        run: ./gradlew test
 
   build-docker:
     name: 'Build Docker Image'
