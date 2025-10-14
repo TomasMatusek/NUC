@@ -16,7 +16,7 @@ public class NucWebAppSpringServiceApplication {
     static class NucWebAppController {
 		@GetMapping(path = "/")
 		public String test() {
-			return "Hello World";
+			return "Hello World from Spring service";
 		}
 	}
 }
