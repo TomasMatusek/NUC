@@ -46,6 +46,7 @@ jobs:
         run: docker rm -f nuc-web-app-spring-service || true
 
       - name: Run backend container
-        run: docker run -d \
+        run: |
+          docker run -d \
           -e MY_ENVIRONMENT_VARIABLE=$MY_ENVIRONMENT_VARIABLE \
           --name nuc-web-app-spring-service -p 8090:8080 nuc-web-app-spring-service:latest
