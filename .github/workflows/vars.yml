@@ -11,4 +11,5 @@ jobs:
       - name: Print
         env:
           TEST: ${{ vars.MY_ENVIRONMENT_VARIABLE }}
-        run: echo "Hodnota: $TEST"
+        run: | 
+          echo "Hodnota: $TEST"
