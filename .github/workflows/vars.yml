@@ -1,0 +1,14 @@
+name: Variables Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-tests:
+    name: 'Test'
+    runs-on: [self-hosted, nuc-runner]
+    steps:
+      - name: Print
+      env:
+        TEST: ${{ vars.MY_ENVIRONMENT_VARIABLE }}
+      run: echo "Hdnota: $TEST"
