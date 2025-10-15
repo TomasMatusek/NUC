@@ -50,5 +50,5 @@ jobs:
       - name: Run backend container
         run: |
           docker run -d \
-          -e MY_ENVIRONMENT_VARIABLE=$MY_ENVIRONMENT_VARIABLE \
+          -e MY_ENVIRONMENT_VARIABLE=${{ vars.MY_ENVIRONMENT_VARIABLE }} \
           --name nuc-web-app-spring-service -p 8090:8080 nuc-web-app-spring-service:latest
