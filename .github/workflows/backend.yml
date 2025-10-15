@@ -42,7 +42,7 @@ jobs:
     runs-on: [self-hosted, nuc-runner]
     needs: [run-tests, build-docker]
     env:
-      MY_ENVIRONMENT_VARIABLE: ${{ secrets.MY_ENVIRONMENT_VARIABLE }}
+      MY_ENVIRONMENT_VARIABLE: ${{ vars.MY_ENVIRONMENT_VARIABLE }}
     steps:
       - name: Stop existing containers
         run: docker rm -f nuc-web-app-spring-service || true
