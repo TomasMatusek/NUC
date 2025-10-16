@@ -17,6 +17,7 @@ jobs:
         run: | 
           echo "Hodnota env 1: ${{ vars.NICE_VARIABLE }}"
           echo "Hodnota env 2: ${{ env.NICE_VARIABLE }}"
+          echo "Hodnota secret 1: ${{ secrets.NICE_SECRET }}"
           echo "Local 1: $LOCAL_ENV"
           echo "Local 2: $NICE_VARIABLE"
           echo "Local 3: $NICE_VARIABLE_2"
