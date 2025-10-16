@@ -9,7 +9,5 @@ jobs:
     runs-on: [self-hosted, nuc-runner]
     steps:
       - name: Print
-        env:
-          TEST: ${{ vars.MY_ENVIRONMENT_VARIABLE }}
         run: | 
-          echo "Hodnota: $TEST"
+          echo "Hodnota: ${{ vars.MY_ENVIRONMENT_VARIABLE }}"
