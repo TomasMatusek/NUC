@@ -11,7 +11,6 @@ env:
 jobs:
   run-tests:
     name: 'Test
-    environment: test
     runs-on: [self-hosted, nuc-runner]
     steps:
       - name: Print
