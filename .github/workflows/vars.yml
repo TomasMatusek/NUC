@@ -5,6 +5,7 @@ on:
 
 env:
   LOCAL_ENV: Ahoj
+  TEST_ENV: ${{ env.MY_ENVIRONMENT_VARIABLE }}
 
 jobs:
   run-tests:
@@ -14,6 +15,6 @@ jobs:
       - name: Print
         run: | 
           echo "Hodnota env 1: ${{ vars.MY_ENVIRONMENT_VARIABLE }}"
-          echo "Hodnota env 2: ${{ MY_ENVIRONMENT_VARIABLE }}"
+          echo "Hodnota env 2: ${{ env.MY_ENVIRONMENT_VARIABLE }}"
           echo "Hodnota env 2: $TEST_ENV"
           echo "Local: $LOCAL_ENV"
