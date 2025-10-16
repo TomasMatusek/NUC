@@ -6,7 +6,6 @@ on:
 env:
   LOCAL_ENV: Ahoj
   NICE_VARIABLE: ${{ vars.NICE_VARIABLE }}
-  NICE_VARIABLE_2: ${{ env.NICE_VARIABLE }}
 
 jobs:
   run-tests:
