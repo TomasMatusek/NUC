@@ -10,7 +10,8 @@ env:
 
 jobs:
   run-tests:
-    name: 'Test
+    name: 'Test'
+    environment: test
     runs-on: [self-hosted, nuc-runner]
     steps:
       - name: Print
