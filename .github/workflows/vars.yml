@@ -6,6 +6,7 @@ on:
 env:
   LOCAL_ENV: Ahoj
   NICE_VARIABLE: ${{ vars.NICE_VARIABLE }}
+  NICE_VARIABLE_2: ${{ env.NICE_VARIABLE }}
 
 jobs:
   run-tests:
@@ -16,4 +17,6 @@ jobs:
         run: | 
           echo "Hodnota env 1: ${{ vars.NICE_VARIABLE }}"
           echo "Hodnota env 2: ${{ env.NICE_VARIABLE }}"
-          echo "Local: $LOCAL_ENV"
+          echo "Local 1: $LOCAL_ENV"
+          echo "Local 2: $NICE_VARIABLE"
+          echo "Local 3: $NICE_VARIABLE_2"
