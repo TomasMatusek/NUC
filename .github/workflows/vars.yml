@@ -1,10 +1,7 @@
-name: Variables Test
+name: Variables Print
 
 on:
   workflow_dispatch:
-
-env:
-  env_var: ${{ vars.ENV_CONTEXT_VAR }}
 
 jobs:
   run-tests:
