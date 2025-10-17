@@ -8,10 +8,6 @@ on:
       - '.github/workflows/backend.yml'
 
 jobs:
-  environment: test
-  env:
-    POSTGRES_DB: ${{ vars.POSTGRES_DB }}
-    POSTGRES_USER: ${{ vars.POSTGRES_USER }}
   run-tests:
     name: 'Run Unit Tests'
     runs-on: [self-hosted, nuc-runner]
@@ -51,11 +47,17 @@ jobs:
         run: |
           echo "POSTGRES_DB: $POSTGRES_DB"
           echo "POSTGRES_USER: $POSTGRES_USER"
+        env:
+          POSTGRES_DB: ${{ vars.POSTGRES_DB }}
+          POSTGRES_USER: ${{ vars.POSTGRES_USER }}
 
       - name: Stop existing containers
         run: docker rm -f nuc-web-app-spring-service || true
 
       - name: Run backend container
+        env:
+          POSTGRES_DB: ${{ vars.POSTGRES_DB }}
+          POSTGRES_USER: ${{ vars.POSTGRES_USER }}
         run: |
           docker run -d \
           -e POSTGRES_DB=$POSTGRES_DB \
