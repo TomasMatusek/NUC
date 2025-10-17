@@ -43,14 +43,6 @@ jobs:
     needs: [run-tests, build-docker]
     environment: test
     steps:
-      - name: Show Variables
-        run: |
-          echo "POSTGRES_DB: $POSTGRES_DB"
-          echo "POSTGRES_USER: $POSTGRES_USER"
-        env:
-          POSTGRES_DB: ${{ vars.POSTGRES_DB }}
-          POSTGRES_USER: ${{ vars.POSTGRES_USER }}
-
       - name: Stop existing containers
         run: docker rm -f nuc-web-app-spring-service || true
 
@@ -58,8 +50,11 @@ jobs:
         env:
           POSTGRES_DB: ${{ vars.POSTGRES_DB }}
           POSTGRES_USER: ${{ vars.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         run: |
           docker run -d \
           -e POSTGRES_DB=$POSTGRES_DB \
           -e POSTGRES_USER=$POSTGRES_USER \
-          --name nuc-web-app-spring-service -p 8090:8080 nuc-web-app-spring-service:latest
+          -e POSTGRES_PASSWORD=$POSTGRES_PAWORD \
+          --name nuc-web-app-spring-service \
+          -p 8090:8080 nuc-web-app-spring-service:latest
