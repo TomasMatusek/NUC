@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class NucController {
 
-    @Value("${MY_ENVIRONMENT_VARIABLE:default-value}")
-    private String myEnvVar;
+    @Value("${POSTGRES_USER:default-value}")
+    private String postgresUser;
 
     @GetMapping("/")
     public String test() {
-        return "Hello World from Spring service: " + myEnvVar;
+        return "Hello World from Spring service: " + postgresUser;
     }
 }
