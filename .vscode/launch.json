@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "NucWebAppSpringServiceApplication",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "online.ultimate_homelab.nuc_web_app_spring_service.NucWebAppSpringServiceApplication",
+            "projectName": "nuc-web-app-spring-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/nuc-web-app-spring-service/.env",
+            "vmArgs": "-Dspring.profiles.active=test"
+        }
+    ]
+}

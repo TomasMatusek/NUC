@@ -26,3 +26,10 @@ Homelab testing environment
 ## CI/CD
 
 - GitLabs
+
+## Spring Backend
+
+- Do not inject env variables using -e to docker run, secrets are visible
+  - Create .properties template and replace values by env variables
+  - Place .properties file outside of docker ? Or inside to docker ? And reference it by -e parameter
+    - This way password won't be presented in logs, processes ...
