@@ -55,6 +55,6 @@ jobs:
           docker run -d \
           -e POSTGRES_DB=$POSTGRES_DB \
           -e POSTGRES_USER=$POSTGRES_USER \
-          -e POSTGRES_PASSWORD=$POSTGRES_PAWORD \
+          -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
           --name nuc-web-app-spring-service \
           -p 8090:8080 nuc-web-app-spring-service:latest
