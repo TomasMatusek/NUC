@@ -47,13 +47,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set environment variables
-        run: |
-          echo "POSTGRES_DB=${{ vars.POSTGRES_DB }}" >> $GITHUB_ENV
-          echo "POSTGRES_USER=${{ vars.POSTGRES_USER }}" >> $GITHUB_ENV
-          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> $GITHUB_ENV
-
       - name: Stop and remove nuc-web-app-spring-service container
+        working-directory: nuc-web-app-spring-service
         run: |
           docker compose stop nuc-web-app-spring-service || true
           docker compose rm -f nuc-web-app-spring-service || true
