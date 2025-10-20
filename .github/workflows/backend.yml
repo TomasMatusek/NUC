@@ -59,4 +59,5 @@ jobs:
           docker compose rm -f nuc-web-app-spring-service || true
 
       - name: Start nuc-web-app-spring-service using Docker Compose
+        working-directory: nuc-web-app-spring-service
         run: docker compose up -d --build nuc-web-app-spring-service
