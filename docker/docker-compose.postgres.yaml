@@ -2,6 +2,8 @@ version: '3.9'
 services:
   postgres-database:
     image: postgres:16
+    container_name: postgres
+    restart: unless-stopped
     environment:
       POSTGRES_USER: postgresuser
       POSTGRES_PASSWORD: fia913kasd95123
