@@ -1,0 +1,18 @@
+name: Frontend Build
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'nuc-web-app-front-end/**'
+      - '.github/workflows/frontend.yml'
+
+jobs:
+  build-docker:
+    name: 'Build Docker Image'
+    runs-on: [self-hosted, nuc-runner]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+        

@@ -1,0 +1,11 @@
+services:
+  backend:
+    image: nuc-web-app-spring-service:latest
+    container_name: nuc-web-app-spring-service
+    restart: unless-stopped
+    ports:
+      - "8090:8080"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

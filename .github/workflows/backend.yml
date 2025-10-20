@@ -38,23 +38,25 @@ jobs:
         run: docker build -t nuc-web-app-spring-service:latest .
 
   deploy:
-    name: "Start Docker Container"
+    name: "Deploy Backend via Docker Compose"
     runs-on: [self-hosted, nuc-runner]
     needs: [run-tests, build-docker]
     environment: test
-    steps:
-      - name: Stop existing containers
-        run: docker rm -f nuc-web-app-spring-service || true
 
-      - name: Run backend container
-        env:
-          POSTGRES_DB: ${{ vars.POSTGRES_DB }}
-          POSTGRES_USER: ${{ vars.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set environment variables
         run: |
-          docker run -d \
-          -e POSTGRES_DB=$POSTGRES_DB \
-          -e POSTGRES_USER=$POSTGRES_USER \
-          -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-          --name nuc-web-app-spring-service \
-          -p 8090:8080 nuc-web-app-spring-service:latest
+          echo "POSTGRES_DB=${{ vars.POSTGRES_DB }}" >> $GITHUB_ENV
+          echo "POSTGRES_USER=${{ vars.POSTGRES_USER }}" >> $GITHUB_ENV
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> $GITHUB_ENV
+
+      - name: Stop and remove nuc-web-app-spring-service container
+        run: |
+          docker compose stop nuc-web-app-spring-service || true
+          docker compose rm -f nuc-web-app-spring-service || true
+
+      - name: Start nuc-web-app-spring-service using Docker Compose
+        run: docker compose up -d --build nuc-web-app-spring-service

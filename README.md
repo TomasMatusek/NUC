@@ -33,3 +33,7 @@ Homelab testing environment
   - Create .properties template and replace values by env variables
   - Place .properties file outside of docker ? Or inside to docker ? And reference it by -e parameter
     - This way password won't be presented in logs, processes ...
+
+## Todo
+
+- [ ] Run github workflows using docker compose instead of docker command
