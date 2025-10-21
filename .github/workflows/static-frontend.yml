@@ -2,9 +2,11 @@ name: Build Static Frontend
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
   push:
     paths:
-      - apps/static-frontend/**
       - .github/workflows/static-frontend.yml
 
 jobs:

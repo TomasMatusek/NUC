@@ -7,7 +7,6 @@ on:
         type: environment
   push:
     paths:
-      - 'apps/spring-service/**'
       - '.github/workflows/backend.yml'
 
 jobs:
