@@ -15,4 +15,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: 'Build Docker Image'
+        working-directory: apps/static-frontned
+        run: docker build -t static-frontend
+  
+  deploy:
+      name: 'Deploy Static Frontend via Docker Compose'
+      runs-on: [self-hosted, nuc-runner]
+      needs: [build-docker]
+      
+      steps:
+        - name: 'Checkout repository'
+          uses: actions/Checkout@v4
+
+        - name: 'Stop and remove static frontend container'
+          working-directory: apps/static-frontend
+          run: |
+            docker compose stop static-frontend || true
+            docker compose rm -f static-frontend || true
+
+        - name: 'Start static frontned via docker compose'
+          working-directory: apps/static-frontend
+          run: docker compose up -d --build static-frontend
+
         
