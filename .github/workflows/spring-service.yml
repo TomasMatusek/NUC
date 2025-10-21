@@ -37,7 +37,9 @@ jobs:
 
       - name: Build Docker image
         working-directory: apps/spring-service
-        run: docker build -t spring-service:latest .
+        run: |
+          export VERSION=${GITHUB_REF_NAME}
+          docker build -t spring-service:${GITHUB_REF_NAME} .
 
   deploy:
     name: Deploy Spring Service via Docker Compose
