@@ -1,11 +1,11 @@
-name: Frontend Build
+name: Build Static Frontend
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'nuc-web-app-front-end/**'
-      - '.github/workflows/frontend.yml'
+      - 'apps/static-frontend/**'
+      - '.github/workflows/static-frontend.yml'
 
 jobs:
   build-docker:
