@@ -1,10 +1,10 @@
-name: Backend Build
+name: Build Spring Service
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'nuc-web-app-spring-service/**'
+      - 'apps/spring-service/**'
       - '.github/workflows/backend.yml'
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Run tests
-        working-directory: nuc-web-app-spring-service
+        working-directory: apps/spring-service
         run: ./gradlew test
 
   build-docker:
@@ -34,8 +34,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        working-directory: nuc-web-app-spring-service
-        run: docker build -t nuc-web-app-spring-service:latest .
+        working-directory: apps/spring-service
+        run: docker build -t spring-service:latest .
 
   deploy:
     name: "Deploy Backend via Docker Compose"
@@ -47,12 +47,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Stop and remove nuc-web-app-spring-service container
-        working-directory: nuc-web-app-spring-service
+      - name: Stop and remove spring-service container
+        working-directory: apps/spring-service
         run: |
-          docker compose stop nuc-web-app-spring-service || true
-          docker compose rm -f nuc-web-app-spring-service || true
+          docker compose stop spring-service || true
+          docker compose rm -f spring-service || true
 
-      - name: Start nuc-web-app-spring-service using Docker Compose
-        working-directory: nuc-web-app-spring-service
-        run: docker compose up -d --build nuc-web-app-spring-service
+      - name: Start spring-service using Docker Compose
+        working-directory: apps/spring-service
+        run: docker compose up -d --build spring-service

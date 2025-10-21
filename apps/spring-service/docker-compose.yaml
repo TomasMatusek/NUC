@@ -1,7 +1,7 @@
 services:
-  nuc-web-app-spring-service:
-    image: nuc-web-app-spring-service:latest
-    container_name: nuc-web-app-spring-service
+  spring-service:
+    image: spring-service:latest
+    container_name: spring-service
     restart: unless-stopped
     ports:
       - "8090:8080"
