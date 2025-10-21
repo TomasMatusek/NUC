@@ -3,10 +3,8 @@ name: Build Spring Service
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: "Version tag to deploy (e.g. 1.3.0)"
-        required: true
-        default: "latest"
+      environment:
+        type: environment
   push:
     paths:
       - 'apps/spring-service/**'
