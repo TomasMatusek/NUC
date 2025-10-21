@@ -4,37 +4,37 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'apps/static-frontend/**'
-      - '.github/workflows/static-frontend.yml'
+      - apps/static-frontend/**
+      - .github/workflows/static-frontend.yml
 
 jobs:
   build-docker:
-    name: 'Build Docker Image'
+    name: Build docker image
     runs-on: [self-hosted, nuc-runner]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: 'Build Docker Image'
+      - name: Build docker image
         working-directory: apps/static-frontned
-        run: docker build -t static-frontend
+        run: docker build -t static-frontend:latest .
   
   deploy:
-      name: 'Deploy Static Frontend via Docker Compose'
+      name: Deploy static frontend via docker compose
       runs-on: [self-hosted, nuc-runner]
       needs: [build-docker]
       
       steps:
-        - name: 'Checkout repository'
+        - name: Checkout repository
           uses: actions/Checkout@v4
 
-        - name: 'Stop and remove static frontend container'
+        - name: Stop and remove static frontend container
           working-directory: apps/static-frontend
           run: |
             docker compose stop static-frontend || true
             docker compose rm -f static-frontend || true
 
-        - name: 'Start static frontned via docker compose'
+        - name: Start static frontned via docker compose
           working-directory: apps/static-frontend
           run: docker compose up -d --build static-frontend
 
