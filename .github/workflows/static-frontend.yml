@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build docker image
-        working-directory: apps/static-frontned
+        working-directory: apps/static-frontend
         run: docker build -t static-frontend:latest .
   
   deploy:
@@ -34,7 +34,7 @@ jobs:
             docker compose stop static-frontend || true
             docker compose rm -f static-frontend || true
 
-        - name: Start static frontned via docker compose
+        - name: Start static frontend via docker compose
           working-directory: apps/static-frontend
           run: docker compose up -d --build static-frontend
 
