@@ -27,7 +27,11 @@ jobs:
 
       - name: Build docker image
         working-directory: apps/static-frontend
-        run: docker build -t static-frontend:latest .
+        env:
+          VERSION: ${{ github.ref_name }}
+        run: |
+          echo "Building version: $VERSION"
+          docker build -t static-frontend:latest .
   
   deploy:
       name: Start Docker Contaienr
@@ -46,6 +50,10 @@ jobs:
 
         - name: Docker compose up
           working-directory: apps/static-frontend
-          run: docker compose up -d --build static-frontend
+          env:
+            VERSION: ${{ github.ref_name }}
+          run: |
+            echo "Deploying version: $VERSION"
+            docker compose up -d --build static-frontend
 
         

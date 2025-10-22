@@ -1,7 +1,9 @@
 services:
   static-frontend:
-    image: static-frontend:latest
+    image: static-frontend::${VERSION}
     container_name: static-frontend
     restart: unless-stopped
     ports:
       - "80:80"
+    environment:
+      VERSION: ${VERSION}
