@@ -1,6 +1,6 @@
 services:
   static-frontend:
-    image: static-frontend::${VERSION}
+    image: static-frontend:${VERSION}
     container_name: static-frontend
     restart: unless-stopped
     ports:

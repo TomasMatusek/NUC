@@ -31,7 +31,7 @@ jobs:
           VERSION: ${{ github.ref_name }}
         run: |
           echo "Building version: $VERSION"
-          docker build -t static-frontend:latest .
+          docker build -t static-frontend:${VERSION} .
   
   deploy:
       name: Start Docker Contaienr
