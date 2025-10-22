@@ -60,4 +60,6 @@ jobs:
 
       - name: Start spring-service using Docker Compose
         working-directory: apps/spring-service
+        env:
+          VERSION: ${GITHUB_REF_NAME}
         run: docker compose up -d --build spring-service
