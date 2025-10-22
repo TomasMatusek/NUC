@@ -71,7 +71,9 @@ jobs:
         working-directory: apps/spring-service
         env:
           VERSION: ${{ github.ref_name }}
-          ENVIRONMNET: ${{ github.event.inputs.environment }}
+          ENVIRONMENT: ${{ github.event.inputs.environment }}
+          COMMIT: ${{ github.sha }}
         run: |
-          echo "Deploying version '$VERSION' to environment '$ENVIRONMNET'"
+          echo "Deploying version '$VERSION' to environment '$ENVIRONMENT'"
+          echo "Commit sha '${COMMIT}'"
           docker compose up -d --build spring-service
