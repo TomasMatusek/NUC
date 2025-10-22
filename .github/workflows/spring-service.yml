@@ -56,7 +56,7 @@ jobs:
     runs-on: [self-hosted, nuc-runner]
     needs: [run-tests, build-docker]
     environment: test
-
+    if: ${{ github.event.inputs.action == 'build-and-deploy' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
