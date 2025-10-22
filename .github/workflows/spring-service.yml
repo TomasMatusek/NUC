@@ -42,7 +42,7 @@ jobs:
           docker build -t spring-service:${VERSION} .
 
   deploy:
-    name: Deploy Spring Service via Docker Compose
+    name: Start Docker Container
     runs-on: [self-hosted, nuc-runner]
     needs: [run-tests, build-docker]
     environment: test
@@ -59,6 +59,8 @@ jobs:
 
       - name: Start spring-service using Docker Compose
         working-directory: apps/spring-service
+        env:
+          VERSION: ${{ github.ref_name }}
         run: |
-          export VERSION=${GITHUB_REF_NAME}
+          echo "Deploying version: $VERSION"
           docker compose up -d --build spring-service
