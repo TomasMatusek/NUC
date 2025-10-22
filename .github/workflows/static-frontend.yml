@@ -5,6 +5,14 @@ on:
     inputs:
       environment:
         type: environment
+      action:
+        description: "Choose what to do"
+        required: true
+        type: choice
+        options:
+          - build-only
+          - build-and-deploy
+        default: build-only
   push:
     paths:
       - .github/workflows/static-frontend.yml

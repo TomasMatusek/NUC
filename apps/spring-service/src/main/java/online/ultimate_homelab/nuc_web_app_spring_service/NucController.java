@@ -10,8 +10,16 @@ class NucController {
     @Value("${POSTGRES_USER:default-value}")
     private String postgresUser;
 
+    @Value("${VERSION:unknown}")
+    private String version;
+
     @GetMapping("/")
     public String test() {
         return "Hello World from Spring service: " + postgresUser;
+    }
+
+    @GetMapping("/version")
+    public String getVersion() {
+        return "Version: " + version;
     }
 }
