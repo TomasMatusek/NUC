@@ -15,7 +15,7 @@ on:
         default: build-only
   push:
     paths:
-      - .github/workflows/static-frontend.yml
+      - apps/static-frontend
 
 jobs:
   build-docker:

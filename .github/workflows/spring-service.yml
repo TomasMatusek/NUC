@@ -15,7 +15,7 @@ on:
         default: build-only
   push:
     paths:
-      - '.github/workflows/spring-service.yml'
+      - 'apps/spring-service'
 
 jobs:
   run-tests:
