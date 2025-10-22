@@ -11,7 +11,7 @@ on:
 
 jobs:
   build-docker:
-    name: Build docker image
+    name: Build Docker Image
     runs-on: [self-hosted, nuc-runner]
     steps:
       - name: Checkout code
@@ -22,7 +22,7 @@ jobs:
         run: docker build -t static-frontend:latest .
   
   deploy:
-      name: Deploy static frontend via docker compose
+      name: Start Docker Contaienr
       runs-on: [self-hosted, nuc-runner]
       needs: [build-docker]
       
@@ -30,13 +30,13 @@ jobs:
         - name: Checkout repository
           uses: actions/Checkout@v4
 
-        - name: Stop and remove static frontend container
+        - name: Docker compose stop
           working-directory: apps/static-frontend
           run: |
             docker compose stop static-frontend || true
             docker compose rm -f static-frontend || true
 
-        - name: Start static frontend via docker compose
+        - name: Docker compose up
           working-directory: apps/static-frontend
           run: docker compose up -d --build static-frontend
 
