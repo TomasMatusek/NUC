@@ -39,7 +39,6 @@ jobs:
         working-directory: apps/spring-service
         run: |
           export VERSION=${GITHUB_REF_NAME}
-          echo ${VERSION}
           docker build -t spring-service:${VERSION} .
 
   deploy:
@@ -60,6 +59,6 @@ jobs:
 
       - name: Start spring-service using Docker Compose
         working-directory: apps/spring-service
-        env:
-          VERSION: ${GITHUB_REF_NAME}
-        run: docker compose up -d --build spring-service
+        run: |
+          export VERSION=${GITHUB_REF_NAME}
+          docker compose up -d --build spring-service
