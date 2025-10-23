@@ -34,6 +34,20 @@ Homelab testing environment
   - Place .properties file outside of docker ? Or inside to docker ? And reference it by -e parameter
     - This way password won't be presented in logs, processes ...
 
-## Todo
+## Goals
 
-- [ ] Run github workflows using docker compose instead of docker command
+### Backlog
+
+- Have 2 different envs - prod and test
+
+### In progress
+
+- Transfere github seret into container securelly, so it's not vissible anywhere, use .properties files
+
+### Done
+
+- Add choice for just build and build-and-deploy into workflows
+- Tag Docker images based on git tags and branches
+  - We can run any version any time, revert version
+- User different environmnets - test, prod
+- Run github workflows using docker compose instead of docker command
