@@ -5,6 +5,7 @@ on:
     inputs:
       environment:
         type: environment
+        default: test
       action:
         description: "Choose what to do"
         required: true
@@ -43,6 +44,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Populate properties file
+        working-directory: apps/spring/service
+        run: |
+          echo "Creating application-${{ github.event.inputs.environment }}.properties"
+          cp ./src/main/resources/application.properties
+          cp ./src/main/resources/application-${{ github.event.inputs.environment }}.properties
+          sed -i "s|\${POSTGRES_DB}|${{ vars.POSTGRES_DB }}|g" ./application-${{ github.event.inputs.environment }}.properties
+          sed -i "s|\${POSTGRES_USER}|${{ vars.POSTGRES_USER }}|g" ./application-${{ github.event.inputs.environment }}.properties
+          sed -i "s|\${POSTGRES_PASSWORD}|${{ secrets.POSTGRES_PASSWORD }}|g" ./application-${{ github.event.inputs.environment }}.properties
+          cat application-${{ github.event.inputs.environment }}.properties
+
       - name: Docker build
         working-directory: apps/spring-service
         env:
@@ -55,7 +67,6 @@ jobs:
     name: Start Docker Container
     runs-on: [self-hosted, nuc-runner]
     needs: [run-tests, build-docker]
-    environment: test
     if: ${{ github.event.inputs.action == 'build-and-deploy' }}
     steps:
       - name: Checkout repository
