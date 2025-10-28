@@ -51,7 +51,7 @@ jobs:
           echo "Creating application-${{ github.event.inputs.environment }}.properties"
           mkdir resources
           cp ./src/main/resources/application.properties ./resources/application.properties
-          cp ./src/main/resources/application-${{ github.event.inputs.environment }}.properties ./resources/${{ github.event.inputs.environment }}-application.properties
+          cp ./src/main/resources/application-${{ github.event.inputs.environment }}.properties ./resources/application-${{ github.event.inputs.environment }}.properties
           sed -i "s|\${POSTGRES_DB}|${{ vars.POSTGRES_DB }}|g" ./resources/application-${{ github.event.inputs.environment }}.properties
           sed -i "s|\${POSTGRES_USER}|${{ vars.POSTGRES_USER }}|g" ./resources/application-${{ github.event.inputs.environment }}.properties
           sed -i "s|\${POSTGRES_PASSWORD}|${{ secrets.POSTGRES_PASSWORD }}|g" ./resources/application-${{ github.event.inputs.environment }}.properties
