@@ -46,7 +46,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Populate properties file
-        working-directory: apps/spring/service
+        working-directory: apps/spring-service
         run: |
           echo "Creating application-${{ github.event.inputs.environment }}.properties"
           cp ./src/main/resources/application.properties ./resources/application.properties
