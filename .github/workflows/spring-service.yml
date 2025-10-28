@@ -49,6 +49,7 @@ jobs:
         working-directory: apps/spring-service
         run: |
           echo "Creating application-${{ github.event.inputs.environment }}.properties"
+          mkdir resources
           cp ./src/main/resources/application.properties ./resources/application.properties
           cp ./src/main/resources/application-${{ github.event.inputs.environment }}.properties ./resources/${{ github.event.inputs.environment }}-application.properties
           sed -i "s|\${POSTGRES_DB}|${{ vars.POSTGRES_DB }}|g" ./resources/application-${{ github.event.inputs.environment }}.properties

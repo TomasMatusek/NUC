@@ -23,9 +23,9 @@ Homelab testing environment
 - ssh port forwadring for app accessible only for me using localhost
   - database, gitlab, grafana
 
-## CI/CD
+## CI/CD GitLabs 
 
-- GitLabs
+- Option to deploy to different envs
 
 ## Spring Backend
 
@@ -39,6 +39,7 @@ Homelab testing environment
 ### Backlog
 
 - Have 2 different envs - prod and test
+- Run setups locally, connect spring-service to PostgresDBs
 
 ### In progress
 
@@ -46,7 +47,7 @@ Homelab testing environment
 
 ### Done
 
-- Add choice for just build and build-and-deploy into workflows
+- Add choice for just build and build-and-deploy into workflowss
 - Tag Docker images based on git tags and branches
   - We can run any version any time, revert version
 - User different environmnets - test, prod
