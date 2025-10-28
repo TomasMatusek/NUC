@@ -48,13 +48,18 @@ jobs:
       - name: Populate properties file
         working-directory: apps/spring-service
         run: |
-          echo "Creating application-${{ github.event.inputs.environment }}.properties"
-          mkdir resources
+          ENV_FILE="application-${{ github.event.inputs.environment }}.properties"
+          echo "Creating $ENV_FILE"
+
+          mkdir -p resources
+
           cp ./src/main/resources/application.properties ./resources/application.properties
-          cp ./src/main/resources/application-${{ github.event.inputs.environment }}.properties ./resources/application-${{ github.event.inputs.environment }}.properties
-          sed -i "s|\${POSTGRES_DB}|${{ vars.POSTGRES_DB }}|g" ./resources/application-${{ github.event.inputs.environment }}.properties
-          sed -i "s|\${POSTGRES_USER}|${{ vars.POSTGRES_USER }}|g" ./resources/application-${{ github.event.inputs.environment }}.properties
-          sed -i "s|\${POSTGRES_PASSWORD}|${{ secrets.POSTGRES_PASSWORD }}|g" ./resources/application-${{ github.event.inputs.environment }}.properties
+          cp "./src/main/resources/$ENV_FILE" "./resources/$ENV_FILE"
+
+          sed -i "s|\${POSTGRES_DB}|${{ vars.POSTGRES_DB }}|g" "./resources/$ENV_FILE"
+          sed -i "s|\${POSTGRES_USER}|${{ vars.POSTGRES_USER }}|g" "./resources/$ENV_FILE"
+          sed -i "s|\${POSTGRES_PASSWORD}|${{ secrets.POSTGRES_PASSWORD }}|g" "./resources/$ENV_FILE"
+
 
       - name: Docker build
         working-directory: apps/spring-service
