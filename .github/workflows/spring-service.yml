@@ -48,18 +48,24 @@ jobs:
       - name: Populate properties file
         working-directory: apps/spring-service
         run: |
-          ENV_FILE="application-${{ github.event.inputs.environment }}.properties"
-          echo "Creating $ENV_FILE"
+          BASE_DIR="/opt/nuc-apps/spring-service"
+          RESOURCES_DIR="${CONFIG_BASE}/resources"
+          PROPERTIES_FILE="application-${{ github.event.inputs.environment }}.properties"
+          
+          echo "Preparing resoruces directory: $RESOURCES_DIR"
+          sudo mkdir -p "$RESOURCES_DIR"
 
-          mkdir -p resources
+          cp "./src/main/resources/application.properties" "$RESOURCES_DIR/application.properties"
+          cp "./src/main/resources/$PROPERTIES_FILE" "$RESOURCES_DIR/$ENV_FILE"
 
-          cp ./src/main/resources/application.properties ./resources/application.properties
-          cp "./src/main/resources/$ENV_FILE" "./resources/$ENV_FILE"
+          sudo chown sonic:sonic -R "$RESOURCES_DIR"
+          sudo chmod 700 "$RESOURCES_DIR"
+          sudo chmod 600 "$RESOURCES_DIR/application.properties"
+          sudo chmod 600 "$RESOURCES_DIR/$PROPERTIES_FILE"
 
-          sed -i "s|\${POSTGRES_DB}|${{ vars.POSTGRES_DB }}|g" "./resources/$ENV_FILE"
-          sed -i "s|\${POSTGRES_USER}|${{ vars.POSTGRES_USER }}|g" "./resources/$ENV_FILE"
-          sed -i "s|\${POSTGRES_PASSWORD}|${{ secrets.POSTGRES_PASSWORD }}|g" "./resources/$ENV_FILE"
-
+          sed -i "s|\${POSTGRES_DB}|${{ vars.POSTGRES_DB }}|g" "$RESOURCES_DIR/$PROPERTIES_FILE"
+          sed -i "s|\${POSTGRES_USER}|${{ vars.POSTGRES_USER }}|g" "$RESOURCES_DIR/$PROPERTIES_FILE"
+          sed -i "s|\${POSTGRES_PASSWORD}|${{ secrets.POSTGRES_PASSWORD }}|g" "$RESOURCES_DIR/$PROPERTIES_FILE"
 
       - name: Docker build
         working-directory: apps/spring-service
