@@ -53,15 +53,15 @@ jobs:
           PROPERTIES_FILE="application-${{ github.event.inputs.environment }}.properties"
           
           echo "Preparing resoruces directory: $RESOURCES_DIR"
-          sudo mkdir -p "$RESOURCES_DIR"
+          mkdir -p "$RESOURCES_DIR"
 
           cp "./src/main/resources/application.properties" "$RESOURCES_DIR/application.properties"
           cp "./src/main/resources/$PROPERTIES_FILE" "$RESOURCES_DIR/$ENV_FILE"
 
-          sudo chown sonic:sonic -R "$RESOURCES_DIR"
-          sudo chmod 700 "$RESOURCES_DIR"
-          sudo chmod 600 "$RESOURCES_DIR/application.properties"
-          sudo chmod 600 "$RESOURCES_DIR/$PROPERTIES_FILE"
+          chown sonic:sonic -R "$RESOURCES_DIR"
+          chmod 700 "$RESOURCES_DIR"
+          chmod 600 "$RESOURCES_DIR/application.properties"
+          chmod 600 "$RESOURCES_DIR/$PROPERTIES_FILE"
 
           sed -i "s|\${POSTGRES_DB}|${{ vars.POSTGRES_DB }}|g" "$RESOURCES_DIR/$PROPERTIES_FILE"
           sed -i "s|\${POSTGRES_USER}|${{ vars.POSTGRES_USER }}|g" "$RESOURCES_DIR/$PROPERTIES_FILE"
