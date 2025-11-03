@@ -54,8 +54,8 @@ jobs:
           
           echo "Copying .properties files into directory: $RESOURCES_DIR"
 
-          sudo cp "./src/main/resources/application.properties" "$RESOURCES_DIR/application.properties"
-          sudo cp "./src/main/resources/$PROPERTIES_FILE" "$RESOURCES_DIR/$ENV_FILE"
+          cp "./src/main/resources/application.properties" "$RESOURCES_DIR/application.properties"
+          cp "./src/main/resources/$PROPERTIES_FILE" "$RESOURCES_DIR/$ENV_FILE"
 
           sudo chown sonic:sonic -R "$RESOURCES_DIR"
           sudo chmod 700 "$RESOURCES_DIR"
