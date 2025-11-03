@@ -60,7 +60,7 @@ jobs:
           cp "./src/main/resources/application.properties" "$RESOURCES_DIR/application.properties"
           
           echo "Copying '$PROPERTIES_FILE' into directory: $RESOURCES_DIR"
-          cp "./src/main/resources/$PROPERTIES_FILE" "$RESOURCES_DIR/$ENV_FILE"
+          cp "./src/main/resources/$PROPERTIES_FILE" "$RESOURCES_DIR/$PROPERTIES_FILE"
 
           chown sonic:sonic -R "$RESOURCES_DIR"
           chmod 600 "$RESOURCES_DIR/application.properties"

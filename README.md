@@ -34,6 +34,8 @@ Homelab testing environment
   - Place .properties file outside of docker ? Or inside to docker ? And reference it by -e parameter
     - This way password won't be presented in logs, processes ...
     - Outside - you don't have to rebuild Docker Image you can just change the file's content and restart container
+- Folder for properties file
+  - `cat /opt/nuc-apps/spring-service/resources/application-test.properties`
 
 ## Goals
 
