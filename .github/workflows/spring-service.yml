@@ -47,6 +47,10 @@ jobs:
 
       - name: Populate properties file
         working-directory: apps/spring-service
+        env:
+          POSTGRES_DB: ${{ vars.POSTGRES_DB }}
+          POSTGRES_USER: ${{ vars.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         run: |
           BASE_DIR="/opt/nuc-apps/spring-service"
           RESOURCES_DIR="${BASE_DIR}/resources"
@@ -62,9 +66,9 @@ jobs:
           chmod 600 "$RESOURCES_DIR/application.properties"
           chmod 600 "$RESOURCES_DIR/$PROPERTIES_FILE"
 
-          sed -i "s|\${POSTGRES_DB}|${{ vars.POSTGRES_DB }}|g" "$RESOURCES_DIR/$PROPERTIES_FILE"
-          sed -i "s|\${POSTGRES_USER}|${{ vars.POSTGRES_USER }}|g" "$RESOURCES_DIR/$PROPERTIES_FILE"
-          sed -i "s|\${POSTGRES_PASSWORD}|${{ secrets.POSTGRES_PASSWORD }}|g" "$RESOURCES_DIR/$PROPERTIES_FILE"
+          sed -i "s|\${POSTGRES_DB}|$POSTGRES_DB|g" "$RESOURCES_DIR/$PROPERTIES_FILE"
+          sed -i "s|\${POSTGRES_USER}|$POSTGRES_USER|g" "$RESOURCES_DIR/$PROPERTIES_FILE"
+          sed -i "s|\${POSTGRES_PASSWORD}|$POSTGRES_PASSWORD|g" "$RESOURCES_DIR/$PROPERTIES_FILE"
 
       - name: Docker build
         working-directory: apps/spring-service
