@@ -41,6 +41,7 @@ jobs:
     name: Build Docker Image
     runs-on: [self-hosted, nuc-runner]
     needs: run-tests
+    environment: ${{ github.event.inputs.environment }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
