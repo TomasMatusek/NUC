@@ -6,13 +6,13 @@ services:
     ports:
       - "8090:8080"
     volumes:
-      - ./resources/application.properties:/app/config/application.properties:ro
-      - ./resources/application-test.properties:/app/config/application.properties:ro
+      - /opt/nuc-apps/spring-service/resources/:/opt/nuc-apps/spring-service/resrouces:ro
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      COMMIT: ${COMMIT}
       VERSION: ${VERSION}
       ENVIRONMENT: ${ENVIRONMENT}
       SPRING_PROFILES_ACTIVE: ${ENVIRONMENT}
-      COMMIT: ${COMMIT}
+      SPRING_CONFIG_LOCATION: "classpath:/application.properties,/opt/nuc-apps/spring-service/resrouces/application-${ENVIRONMENT}.properties"
