@@ -22,15 +22,15 @@ class NucController {
 
     @GetMapping("/")
     public String test() {
-        return "Hello World from Spring service: " + postgresUser;
+        return "Hello World from Spring service: " + System.getProperties() + " ENV: " + System.getenv;
     }
 
     @GetMapping("/version")
-public Map<String, String> getVersion() {
-    Map<String, String> response = new HashMap<>();
-    response.put("version", version);
-    response.put("commit", commit);
-    response.put("environment", environment);
-    return response;
-}
+    public Map<String, String> getVersion() {
+        Map<String, String> response = new HashMap<>();
+        response.put("version", version);
+        response.put("commit", commit);
+        response.put("environment", environment);
+        return response;
+    }
 }

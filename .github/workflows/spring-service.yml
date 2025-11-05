@@ -75,7 +75,8 @@ jobs:
 
       - name: Clean workspace
         run: |
-          echo "Cleaning up previous workspace {$GITHUB_WORKSPACE}"
+          echo "Cleaning up workspace $GITHUB_WORKSPACE"
+          rm -rf "$GITHUB_WORKSPACE"/*
 
   deploy:
     name: Start Docker Container
