@@ -73,6 +73,10 @@ jobs:
           echo "Building version: $VERSION"
           docker build -t spring-service:${VERSION} .
 
+      - name: Clean workspace
+        run: |
+          echo "Cleaning up previous workspace {$GITHUB_WORKSPACE}"
+
   deploy:
     name: Start Docker Container
     runs-on: [self-hosted, nuc-runner]
