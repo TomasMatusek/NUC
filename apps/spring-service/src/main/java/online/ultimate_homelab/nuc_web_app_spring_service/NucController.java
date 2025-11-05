@@ -22,7 +22,7 @@ class NucController {
 
     @GetMapping("/")
     public String test() {
-        return "Hello World from Spring service: " + System.getProperties() + " ENV: " + System.getenv;
+        return "Hello World from Spring service: " + System.getProperties() + " ENV: " + System.getenv();
     }
 
     @GetMapping("/version")
