@@ -1,5 +1,5 @@
 name: Spring Service
-run-name: Deploy ${{ github.ref_name }} to ${{ github.event.inputs.environment }}
+run-name: Deploy ${{ github.ref_name }} to ${{ github.event.inputs.environment || 'test' }}
 
 on:
   push:
@@ -39,7 +39,7 @@ jobs:
     name: Build Docker Image
     runs-on: [self-hosted, nuc-runner]
     needs: run-tests
-    environment: ${{ github.event.inputs.environment }}
+    environment: ${{ github.event.inputs.environment || 'test' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -48,7 +48,7 @@ jobs:
         working-directory: apps/spring-service
         run: |
           RESOURCES_DIR="/opt/nuc-apps/spring-service/resources"
-          PROPERTIES_FILE="application-${{ github.event.inputs.environment }}.properties"
+          PROPERTIES_FILE="application-${{ github.event.inputs.environment || 'test' }}.properties"
           
           echo "Copying '$PROPERTIES_FILE' from spring-service into directory: $RESOURCES_DIR on host machine, outside of Docker"
           cp "./src/main/resources/$PROPERTIES_FILE" "$RESOURCES_DIR/$PROPERTIES_FILE"
@@ -93,7 +93,7 @@ jobs:
         env:
           COMMIT: ${{ github.sha }}
           VERSION: ${{ github.ref_name }}
-          ENVIRONMENT: ${{ github.event.inputs.environment }}
+          ENVIRONMENT: ${{ github.event.inputs.environment || 'test' }}
         run: |
           echo "Deploying version '$VERSION' to environment '$ENVIRONMENT'"
           echo "Commit sha '${COMMIT}'"
