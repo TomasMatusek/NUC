@@ -48,10 +48,6 @@ jobs:
 
       - name: Populate properties file
         working-directory: apps/spring-service
-        env:
-          POSTGRES_DB: ${{ vars.POSTGRES_DB }}
-          POSTGRES_USER: ${{ vars.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         run: |
           RESOURCES_DIR="/opt/nuc-apps/spring-service/resources"
           PROPERTIES_FILE="application-${{ github.event.inputs.environment }}.properties"
