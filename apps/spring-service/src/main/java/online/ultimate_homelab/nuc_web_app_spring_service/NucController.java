@@ -8,9 +8,6 @@ import java.util.*;
 @RestController
 class NucController {
 
-    @Value("${POSTGRES_USER:default-value}")
-    private String postgresUser;
-
     @Value("${VERSION:unknown}")
     private String version;
 
@@ -21,11 +18,6 @@ class NucController {
     private String commit;
 
     @GetMapping("/")
-    public String test() {
-        return "Hello World from Spring service: " + System.getProperties() + " ENV: " + System.getenv();
-    }
-
-    @GetMapping("/version")
     public Map<String, String> getVersion() {
         Map<String, String> response = new HashMap<>();
         response.put("version", version);
