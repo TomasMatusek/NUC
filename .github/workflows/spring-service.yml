@@ -2,6 +2,7 @@ name: Spring Service
 run-name: Deploy ${{ github.ref_name }} to ${{ github.event.inputs.environment }}
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       environment:
@@ -15,9 +16,6 @@ on:
           - build-only
           - build-and-deploy
         default: build-and-deploy
-  push:
-    paths:
-      - 'apps/spring-service'
 
 jobs:
   run-tests:
